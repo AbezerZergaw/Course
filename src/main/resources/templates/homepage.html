@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <head>
+        <th:block th:insert="base :: header"></th:block>
+        <title>Home Page</title>
+    </head>
+
+
+<body>
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Welcome to MC</h1>
+    </div>
+</div>
+
+
+<div th:replace="base:: navbar">
+</div>
+
+<div class="container">
+
+    <table class="table table-sm">
+        <tr>
+            <th>Course title</th>
+            <th>Instructor</th>
+            <th>Description</th>
+
+        </tr>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.title}"></td>
+            <td th:text="${course.instructor}"></td>
+            <td th:text="${course.description}"></td>
+            <td th:text="${course.credit}"></td>
+
+            <td>
+                <a th:href="@{/update/{id}(id=${course.id})}" class="btn btn-success" role="button">Update</a>
+                <a th:href="@{/detail/{id}(id=${course.id})}"  class="btn btn-info" role="button">Details</a>
+                <a th:href="@{/delete/{id}(id=${course.id})}" class="btn btn-danger" role="button">Delete</a>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+
+<div th:replace="base:: footer"></div>
+</body>
+</html>
