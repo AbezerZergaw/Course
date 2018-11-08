@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Classes;
 
 
 import javax.persistence.Entity;
@@ -27,6 +27,13 @@ public class Course {
     private int credit;
 
     public Course() {
+    }
+
+    public Course(String title,String instructor,String description, int credit) {
+        this.title = title;
+        this.instructor = instructor;
+        this.description = description;
+        this.credit = credit;
     }
 
     public long getId() {

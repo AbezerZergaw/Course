@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <head>
@@ -9,43 +9,64 @@
 
 
 <body>
+
 <div class="jumbotron">
     <div class="container">
         <h1 class="text-center">Welcome to MC</h1>
+
+
+        <div th:fragment="navbar">
+            <nav class="navbar  navbar-expand-sm bg-dark navbar-dark  justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addCourse">Add Course</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</div>
-
-
-<div th:replace="base:: navbar">
-</div>
-
-<div class="container">
-
-    <table class="table table-sm">
-        <tr>
-            <th>Course title</th>
-            <th>Instructor</th>
-            <th>Description</th>
-
-        </tr>
-        <tr th:each="course : ${courses}">
-            <td th:text="${course.title}"></td>
-            <td th:text="${course.instructor}"></td>
-            <td th:text="${course.description}"></td>
-            <td th:text="${course.credit}"></td>
-
-            <td>
-                <a th:href="@{/update/{id}(id=${course.id})}" class="btn btn-success" role="button">Update</a>
-                <a th:href="@{/detail/{id}(id=${course.id})}"  class="btn btn-info" role="button">Details</a>
-                <a th:href="@{/delete/{id}(id=${course.id})}" class="btn btn-danger" role="button">Delete</a>
-            </td>
-        </tr>
-    </table>
-
 
 </div>
+    <div class="container">
+
+        <table class="table table-sm">
+            <tr>
+                <th>Course title</th>
+                <th>Instructor</th>
+                <th>Description</th>
+
+            </tr>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.title}"></td>
+                <td th:text="${course.instructor}"></td>
+                <td th:text="${course.description}"></td>
+                <td th:text="${course.credit}"></td>
+
+                <td>
+                    <a th:href="@{/update/{id}(id=${course.id})}" class="btn btn-success" role="button">Update</a>
+                    <a th:href="@{/detail/{id}(id=${course.id})}" class="btn btn-info" role="button">Details</a>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/delete/{id}(id=${course.id})}" class="btn btn-danger" role="button">Delete</a>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
 
 
-<div th:replace="base:: footer"></div>
+    </div>
+
+
+    <div th:fragment="footer"> <div class="footer text-center">copyright 2018</div></div>
+
 </body>
 </html>
