@@ -20,37 +20,40 @@ import java.util.Set;
 public class SSUserDetailsService implements UserDetailsService {
 
     private UserRepo userRepo;
+
     public SSUserDetailsService(UserRepo userRepo) {
 
         this.userRepo = userRepo;
     }
 
-     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 
-        try{
+        try {
             User user = userRepo.findByUsername(username);
-            if(user ==null){
-                System.out.println("User not found with the provided username"+ user.toString());
+            if (user == null) {
+                System.out.println("User not found with the provided username" + user.toString());
                 return null;
             }
 
-            System.out.println("user from username "+ user.toString());
-return new CustomUserDetails(user, getAuthorities(user));
-        }catch (Exception e){
+            System.out.println("user from username " + user.toString());
+            return new CustomUserDetails(user, getAuthorities(user));
+        } catch (Exception e) {
             throw new UsernameNotFoundException("User not found");
         }
-     }
-     private Set<GrantedAuthority> getAuthorities(User User){
-        Set<GrantedAuthority>authorities = new HashSet<GrantedAuthority>();
-        for(Role role:User.getRoles()){
+    }
+
+    private Set<GrantedAuthority> getAuthorities(User User) {
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+
+        for (Role role : User.getRoles()) {
             GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
             authorities.add(grantedAuthority);
         }
-         System.out.println("User authorities are "+ authorities.toString());
+        System.out.println("User authorities are " + authorities.toString());
 
         return authorities;
-     }
+    }
 
 }

@@ -27,11 +27,22 @@ public class MainController {
         model.addAttribute("courses", courseRepo.findAll());
         return "homepage";
     }
+    @RequestMapping("/afterlogin")
+    public String afterLogin(Model model) {
+        model.addAttribute("courses", courseRepo.findAll());
+        return "newhome";
+    }
+
     @RequestMapping("/login")
     public String login() {
+
         return "login";
     }
 
+    @GetMapping("/homePage")
+    public String loginHome(){
+        return "newhome";
+    }
 
 
     @RequestMapping("/addCourse")
