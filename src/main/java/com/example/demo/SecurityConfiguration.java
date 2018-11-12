@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/","/h2-console/**","/register","/css/**", "/js/**").permitAll().
-                antMatchers("/addCourse").access("hasAuthority('ADMIN')").and()
+                antMatchers("/addCourse").access("hasAnyAuthority('ADMIN','USER')").and()
                 .formLogin().loginPage("/login").permitAll().loginProcessingUrl("/confirmLogin").defaultSuccessUrl("/")
                 .and().logout().logoutRequestMatcher( new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").permitAll().permitAll().and().httpBasic();

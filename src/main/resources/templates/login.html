@@ -6,6 +6,9 @@
     <title>Title</title>
 </head>
 <body>
+
+<div th:replace="base :: navbar"></div>
+<!--
 <div th:fragment="navbar">
 <nav class="navbar  navbar-expand-sm bg-dark navbar-dark  justify-content-end">
     <ul class="navbar-nav">
@@ -24,7 +27,7 @@
     </ul>
 </nav>
 </div>
-</div>
+</div>-->
 <h1>Login Page</h1>
 <div th:if="${param.error}">
     Invalid username or password

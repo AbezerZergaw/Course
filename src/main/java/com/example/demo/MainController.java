@@ -28,7 +28,8 @@ public class MainController {
         return "homepage";
     }
     @RequestMapping("/afterlogin")
-    public String afterLogin(Model model) {
+    public String afterLogin(Model model)
+    {
         model.addAttribute("courses", courseRepo.findAll());
         return "newhome";
     }
@@ -39,7 +40,7 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/homePage")
+    @GetMapping("/homepage")
     public String loginHome(){
         return "newhome";
     }
